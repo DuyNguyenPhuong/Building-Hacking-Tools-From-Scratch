@@ -1,43 +1,41 @@
-# Topic: Password Cracking
+# Topic: Password Spraying
 
 ### Member: Dave Nguyen, John Win
 
-### Example tools: johnTheRipper and hashCat
+### Example tools: hydra
 
 ## Project Description
 
-Create a password-cracking tool with a basic set of key functionalities based on John the ripper and hashCat.
+Create a password-spraying tool, containing a set of key functionalities based on Hydra, along with a vulnerable machine. 
 
 ## Learning Goals
 
-- We want to understand how the cryptography hash function works (MD5, SHA256)
-- Understand how multithreading works and how this can be implemented in the context of password cracking
-- Learn how dictionary and brute-force attacks work
-- How can we keep trying new passwords while not alerting the system (Stretch)
-- Set up a key-logging ability in the vulnerable machine that sends back logs to a “mothership” (Stretch)
+- We want to learn how attackers systematically try commonly used passwords across many accounts to avoid lockout mechanisms
+- We want to explore how to use Hydra to perform password spraying on multiple services (SSH, HTTP, SMB)
+- We want to learn how to optimize the attack efficiency, such as parallelization, and multi-threading (Stretch Goal 1)
+- We want to learn how hackers can bypass multi-factor authentication (MFA) (Stretch Goal 2)
+
 
 ## Development Goals
 
-- List of features we want to have:
-- Support multiple hash functions like MD5, SHA1, SHA256
-- The tool will read from a word list (rockyou.txt)
-- Ability to crack the password with or without the salt
-- Have features to increase efficiency like multithreading
-- Have features to keep retrying the password while not alerting the system
+- Once a naive machine (with no lockout mechanism) has been cracked, build a machine with lockout mechanisms
+- Evade lockout and detection mechanisms while also be able to crack the machine
+- Use multithreading for sending multiple requests to the vulnerable machine from multiple attacker machines 
+
 
 ## Testing and Benchmarking
 
-- For correctness, we will have unit tests for hashing algorithms
-  We also will have functional tests to test the entire cracking process
-- For performance, we also will have a test that measures the speed of the cracking process
+- We will have unit tests to check if each function within the spraying tool is working
+- We also will have functional tests to test the entire spraying process
+- For performance, we also will have a test that measures the speed of the cracking process. The goal is to have the vulnerable machine represent a real-life login server with a set speed of server response time. There will be three different test suites. For each test suite, we will collect data and benchmark how differently the server responds and how efficient the spraying process is depending on how short or long the delay is for the password input. 
+  1. Tests using simple and naive passwords 
+  2. Tests using moderate passwords with alphanumeric characters
+  3. Tests using strong passwords with phrases and mixed characters 
 
-* Performance test for simple and naive passwords
-* Performance test for moderate passwords with alphanumeric characters
-* Performance test for strong passwords with phrases and mixed characters
 
 ## Schedule of Development
 
-- Week 1-2: Implementation of dictionary attacks (using a list of passwords)
-- Week 3-4: Implementation of multithreading
-- Week 4-5: Implementation of the unit, functional tests, and time measurements
-- Week 6-7: Stretch goal + Presentation
+- Week 3-4: Implementation of basic functionalities to test open services/ log-in pages on a machine
+- Week 5-6: Implementation of multithreading
+- *Week 7-8: Implementation of the unit, functional tests, and time measurements
+- Week 9-10: Stretch goal + Presentation
