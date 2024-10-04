@@ -5,14 +5,29 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [loginMessage, setLoginMessage] = useState<string>('');
 
-
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (username == "admin" && password == "password") {    
-        setLoginMessage("Login Success!")
-    }
-    else {
-        setLoginMessage("Wrong Credentials!")
+
+    try {
+      // Send a POST request to the backend server
+      const response = await fetch('http://localhost:5050/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        setLoginMessage('Login Success!');
+      } else {
+        setLoginMessage('Invalid Credentials');
+      }
+    } catch (error) {
+      setLoginMessage('An error occurred');
+      console.error('Login error:', error);
     }
   };
 
