@@ -5,7 +5,8 @@
 ### Step 1: Run Back End
 
 ```bash
-cd TargetMachine
+cd TargetMachine/backend
+npm install
 node server.js
 ```
 
