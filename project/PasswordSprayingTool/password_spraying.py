@@ -48,7 +48,7 @@ def attempt_login(username, password):
 # Function to perform password spraying
 def password_spray(usernames, passwords):
     # Using ThreadPoolExecutor to manage a pool of threads
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    with ThreadPoolExecutor(max_workers=10) as executor:
         # Iterate through each username and try each password
         for username in usernames:
             for password in passwords:
@@ -60,8 +60,8 @@ if __name__ == "__main__":
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Build paths relative to the script's directory
-    username_file_path = os.path.join(base_dir, 'TestInput', 'username.txt')
-    password_file_path = os.path.join(base_dir, 'TestInput', 'password.txt')
+    username_file_path = os.path.join(base_dir, 'data', 'TestInput', 'top-usernames.txt')
+    password_file_path = os.path.join(base_dir, 'data', 'TestInput', 'rockyou-500.txt')
 
     # Read the usernames and passwords from files
     usernames = read_usernames(username_file_path)

@@ -1,0 +1,2 @@
+5 threads: 16s
+10 threads: 12s
