@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');  // Import CORS middleware
+const db = require('./database');
 const app = express();
 const port = 5050;
 
@@ -14,6 +15,9 @@ app.use(express.json());
 // Handle login POST request
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
+
+  console.log('req ', req)
+  console.log("res ", res)
 
   // Simulated login check
   if (username === 'admin' && password === 'password') {
