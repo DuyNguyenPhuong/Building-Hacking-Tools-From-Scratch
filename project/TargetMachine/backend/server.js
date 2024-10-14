@@ -16,9 +16,6 @@ app.use(express.json());
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  console.log('req ', req)
-  console.log("res ", res)
-
   // Simulated login check
   if (username === 'admin' && password === 'password') {
     res.status(200).json({ message: 'Login Success!' });
